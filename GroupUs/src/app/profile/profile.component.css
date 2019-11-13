@@ -1,0 +1,46 @@
+.userInfo {
+    width:20%;
+
+    float:left;
+
+    margin-left:2%;
+    margin-right:2%;
+}
+
+#profilepic {
+    width:100%;
+    height:100%;
+
+    border-radius:5px;
+}
+
+#name {
+    font-size:28px;
+
+    margin:0px;
+    margin-top:10px;
+}
+
+#username {
+    font-size:18px;
+    color: lightslategray;
+
+    margin:0px;
+}
+
+.groupsInfo {
+    width:70%;
+    float:left;
+
+    margin-left:2%;
+    margin-right:2%;
+}
+
+.form-control {
+    display:inline-block;
+}
+
+#groupInput {
+    margin-top:10px;
+    margin-bottom:20px;
+}

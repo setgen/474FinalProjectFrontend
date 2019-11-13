@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Binary } from 'selenium-webdriver/firefox';
 
 class User {
-  firstName: String;
-  lastName: String;
-  username: String;
-  password: String;
-  bio: String;
+  firstName: string;
+  lastName: string;
+  username: string;
+  password: string;
+  bio: string;
   id: number;
   groupIDs: number[];
   picture: Binary;
@@ -14,7 +14,7 @@ class User {
 
 class Group {
   groupID: number;
-  groupName: String;
+  groupName: string;
   members: number[];
 }
 
@@ -53,11 +53,13 @@ export class ProfileComponent implements OnInit {
   u: User;
   groups: Group[];
   filteredGroups: Group[];
+  canEdit: boolean;
 
   constructor() { 
     this.u = testUser;
     this.groups = [g1,g2,g3,g4,g5];
     this.filteredGroups = this.groups;
+    this.canEdit = true; //tokenID == this.u.id;
   }
 
   ngOnInit() {

@@ -1,24 +1,31 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <section>
-    <div class='userInfo'>
-        <img id='profilepic' src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/69/69a17727cc835e56f0c16e84093242772e0238d0_full.jpg" alt="profileexample">
-        <h1 id='name'><b>{{u.firstName}} {{u.lastName}}</b></h1>
-        <p id='username'>{{u.username}}</p>
-        <hr/>
-        <p>{{u.bio}}</p>
+    <div *ngIf="u == null; else profile">
+        <div class="spinner-border" id="loadingSpinner">
+        </div>
     </div>
-    <div class='groupsInfo'>
-        <h3>
-            {{u.firstName}}'s Groups
-            <span id=groupCount class="badge badge-secondary badge-pill">{{groups.length}}</span>
-        </h3>
-        <hr/>
-        <input #groupInput type="text" class="form-control" id="groupInput" placeholder="Find a group..." (input)="filterGroupName(groupInput.value)">
-        <hr/>
-        <ul class='list-group'>
-            <a href="#" class="list-group-item list-group-item-action" *ngFor="let g of filteredGroups">
-                <b>{{g.groupName}}</b> ({{g.members.length}} members)
-            </a>
-        </ul>
-    </div>
+    <ng-template #profile>
+        <div class='userInfo'>
+            <img id='profilepic' src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/69/69a17727cc835e56f0c16e84093242772e0238d0_full.jpg" alt="profileexample">
+            <h1 id='name'><b>{{u.firstName}} {{u.lastName}}</b></h1>
+            <p id='username'>{{u.username}}</p>
+            <hr/>
+            <p>{{u.bio}}</p>
+        </div>
+        <div class='groupsInfo'>
+            <h3>
+                {{u.firstName}}'s Groups
+                <span id=groupCount class="badge badge-secondary badge-pill">{{groups.length}}</span>
+            </h3>
+            <hr/>
+            <input #groupInput type="text" class="form-control" id="groupInput" placeholder="Find a group..." (input)="filterGroupName(groupInput.value)">
+            <hr/>
+            <ul class='list-group'>
+                <a href="#" class="list-group-item list-group-item-action" *ngFor="let g of filteredGroups">
+                    <b>{{g.groupName}}</b> ({{g.members.length}} members)
+                </a>
+            </ul>
+        </div>
+    </ng-template>
+        
 </section>

@@ -1,8 +1,19 @@
+#loadingSpinner {
+    width: 3rem;
+    height: 3rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -(3/2)rem;
+    margin-top: -(3/2)rem;
+}
+
 .userInfo {
     width:20%;
 
     float:left;
 
+    margin-top:2%;
     margin-left:2%;
     margin-right:2%;
 }
@@ -32,6 +43,7 @@
     width:70%;
     float:left;
 
+    margin-top:2%;
     margin-left:2%;
     margin-right:2%;
 }

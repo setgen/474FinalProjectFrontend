@@ -39,6 +39,15 @@
     margin:0px;
 }
 
+#firstNameForm {
+    margin-top:7%;
+    margin-bottom:2%;
+}
+
+#lastNameForm {
+    margin-top:2%;
+}
+
 .groupsInfo {
     width:70%;
     float:left;

@@ -53,20 +53,38 @@ export class ProfileComponent implements OnInit {
   u: User;
   groups: Group[];
   filteredGroups: Group[];
+
   canEdit: boolean;
+  editingUserInfo: boolean;
 
   constructor() { 
     this.u = testUser;
     this.groups = [g1,g2,g3,g4,g5];
     this.filteredGroups = this.groups;
+
     this.canEdit = true; //tokenID == this.u.id;
+    this.editingUserInfo = false;
   }
 
   ngOnInit() {
+
   }
 
   filterGroupName(filter:string) {
     this.filteredGroups = this.groups.filter(g => g.groupName.toLowerCase().includes(filter.toLowerCase()));
   }
 
+  setEditingUser(b:boolean) {
+    this.editingUserInfo = b;
+  }
+
+  setUserInfo(f:string, l:string, b:string) {
+    this.u.firstName = f;
+    this.u.lastName = l;
+    this.u.bio = b;
+  }
+
+  removeGroup(g:Group) {
+    this.groups.splice(this.groups.indexOf(g),1);
+  }
 }

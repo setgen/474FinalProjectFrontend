@@ -13,7 +13,7 @@
                 <p id='username'>{{u.username}}</p>
                 <hr/>
                 <p>{{u.bio}}</p>
-                <button *ngIf="canEdit" type="button" class="btn" (click)="setEditingUser(true);">
+                <button *ngIf="canEdit" class="btn btn-dark btn-block" (click)="setEditingUser(true);">
                     Edit Profile
                 </button>
             </div>
@@ -22,7 +22,7 @@
                 <input #lastNameInput type="text" id="lastNameForm" class="form-control form-control-sm" value="{{u.lastName}}" placeholder="Last Name" required>
                 <hr/>
                 <textarea #bioInput type="text" rows=5 class="form-control form-control-sm" value="{{u.bio}}" placeholder="Bio"></textarea>
-                <button *ngIf="canEdit" type="button" class="btn" (click)="setEditingUser(false); setUserInfo(firstNameInput.value, lastNameInput.value, bioInput.value);">
+                <button *ngIf="canEdit" id="okBtn" class="btn btn-success btn-sm btn-block" (click)="setEditingUser(false); setUserInfo(firstNameInput.value, lastNameInput.value, bioInput.value);">
                     OK
                 </button>
             </ng-template>
@@ -40,12 +40,11 @@
                     <a href="/groups/{{g.groupID}}">
                         <b>{{g.groupName}}</b> ({{g.members.length}} members)
                     </a>
-                    <button *ngIf="canEdit" type="button" class="btn" (click)="removeGroup(g); filterGroupName(groupInput.value);">
+                    <button *ngIf="canEdit" type="button" class="btn btn-danger btn-sm py-0" style="float:right; font-size: small;" (click)="removeGroup(g); filterGroupName(groupInput.value);">
                         Remove
                     </button>
                 </li>
             </ul>
         </div>
     </ng-template>
-        
 </section>

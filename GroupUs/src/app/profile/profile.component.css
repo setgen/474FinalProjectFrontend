@@ -48,6 +48,11 @@
     margin-top:2%;
 }
 
+#okBtn {
+    margin-top:5%;
+    margin-bottom:5%;
+}
+
 .groupsInfo {
     width:70%;
     float:left;

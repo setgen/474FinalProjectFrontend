@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Binary } from 'selenium-webdriver/firefox';
 
+/* DUMMY DATA */
 class User {
   firstName: string;
   lastName: string;
@@ -43,6 +44,7 @@ g4.members = [1, 2, 3, 4];
 g5.groupID = 222;
 g5.groupName = "Friends Group";
 g5.members = [1, 2, 3, 4, 5];
+/* END OF DUMMY DATA */
 
 @Component({
   selector: 'app-profile',

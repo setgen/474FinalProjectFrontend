@@ -1,5 +1,4 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <section>
     <div *ngIf="u == null; else profile">
         <div class="spinner-border" id="loadingSpinner">
@@ -7,7 +6,12 @@
     </div>
     <ng-template #profile>
         <div class='userInfo'>
-            <img id='profilepic' src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/69/69a17727cc835e56f0c16e84093242772e0238d0_full.jpg" alt="profileexample">
+            <label *ngIf="canEdit" for="profilePicUpload" class='profilepic editableProfilePic'>
+                <img src="{{u.picture}}" class='profilepic'>
+            </label>
+            <input *ngIf="canEdit" type=file id="profilePicUpload" accept="image/png, image/jpeg">
+            <img *ngIf="!canEdit" src="{{u.picture}}" class='profilepic'>
+
             <div *ngIf="!editingUserInfo; else editUserInfoForm">
                 <h1 id='name'><b>{{u.firstName}} {{u.lastName}}</b></h1>
                 <p id='username'>{{u.username}}</p>
@@ -22,8 +26,11 @@
                 <input #lastNameInput type="text" id="lastNameForm" class="form-control form-control-sm" value="{{u.lastName}}" placeholder="Last Name" required>
                 <hr/>
                 <textarea #bioInput type="text" rows=5 class="form-control form-control-sm" value="{{u.bio}}" placeholder="Bio"></textarea>
-                <button *ngIf="canEdit" id="okBtn" class="btn btn-success btn-sm btn-block" (click)="setEditingUser(false); setUserInfo(firstNameInput.value, lastNameInput.value, bioInput.value);">
-                    OK
+                <button *ngIf="canEdit" id="okBtn" class="btn btn-success btn-sm" (click)="setEditingUser(false); setUserInfo(firstNameInput.value, lastNameInput.value, bioInput.value);">
+                    Save
+                </button>
+                <button *ngIf="canEdit" id="okBtn" class="btn btn-light btn-sm" (click)="setEditingUser(false);">
+                    Cancel
                 </button>
             </ng-template>
         </div>

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Binary } from 'selenium-webdriver/firefox';
 
 /* DUMMY DATA */
 class User {

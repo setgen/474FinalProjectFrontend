@@ -1,17 +1,23 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <section>
+    <!--Display Loading Spinner while User is null-->
     <div *ngIf="u == null; else profile">
         <div class="spinner-border" id="loadingSpinner">
         </div>
     </div>
+
+    <!--User Profile-->
     <ng-template #profile>
         <div class='userInfo'>
+            <!--Standard Profile Pic-->
+            <img *ngIf="!canEdit" src="{{u.picture}}" class='profilepic'>
+            <!--Editable Profile Pic-->
             <label *ngIf="canEdit" for="profilePicUpload" class='profilepic editableProfilePic'>
                 <img src="{{u.picture}}" class='profilepic'>
             </label>
             <input #profilePicInput *ngIf="canEdit" type=file id="profilePicUpload" accept="image/png, image/jpeg" (change)="uploadProfilePic(profilePicInput.files)">
-            <img *ngIf="!canEdit" src="{{u.picture}}" class='profilepic'>
 
+            <!--User Info-->
             <div *ngIf="!editingUserInfo; else editUserInfoForm">
                 <h1 id='name'><b>{{u.firstName}} {{u.lastName}}</b></h1>
                 <p id='username'>{{u.username}}</p>
@@ -21,6 +27,7 @@
                     Edit Profile
                 </button>
             </div>
+            <!--User Info Form-->
             <ng-template #editUserInfoForm>
                 <input #firstNameInput type="text" id="firstNameForm" class="form-control form-control-sm" value="{{u.firstName}}" placeholder="First Name" required>
                 <input #lastNameInput type="text" id="lastNameForm" class="form-control form-control-sm" value="{{u.lastName}}" placeholder="Last Name" required>
@@ -34,6 +41,8 @@
                 </button>
             </ng-template>
         </div>
+
+        <!--Group Info-->
         <div class='groupsInfo'>
             <h3>
                 {{u.firstName}}'s Groups

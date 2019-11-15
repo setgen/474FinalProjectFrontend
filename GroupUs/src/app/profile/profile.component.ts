@@ -90,4 +90,12 @@ export class ProfileComponent implements OnInit {
   removeGroup(g:Group) {
     this.groups.splice(this.groups.indexOf(g),1);
   }
+
+  uploadProfilePic(files:FileList) {
+    if (files.length == 0) return;
+    let reader = new FileReader();
+    reader.readAsDataURL(files[0]);
+    reader.onload = () => this.u.picture = reader.result.toString();
+    reader.onerror = err => console.log(err);
+  }
 }

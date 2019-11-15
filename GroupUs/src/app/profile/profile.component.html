@@ -9,7 +9,7 @@
             <label *ngIf="canEdit" for="profilePicUpload" class='profilepic editableProfilePic'>
                 <img src="{{u.picture}}" class='profilepic'>
             </label>
-            <input *ngIf="canEdit" type=file id="profilePicUpload" accept="image/png, image/jpeg">
+            <input #profilePicInput *ngIf="canEdit" type=file id="profilePicUpload" accept="image/png, image/jpeg" (change)="uploadProfilePic(profilePicInput.files)">
             <img *ngIf="!canEdit" src="{{u.picture}}" class='profilepic'>
 
             <div *ngIf="!editingUserInfo; else editUserInfoForm">
@@ -45,7 +45,7 @@
             <ul class='list-group'>
                 <li class="list-group-item list-group-item-action" *ngFor="let g of filteredGroups">
                     <a href="/groups/{{g.groupID}}">
-                        <b>{{g.groupName}}</b> ({{g.members.length}} members)
+                        <b>{{g.groupName}}</b> ({{g.members.length}} {{g.members.length == 1 ? 'member' : 'members'}})
                     </a>
                     <button *ngIf="canEdit" type="button" class="btn btn-danger btn-sm py-0" style="float:right; font-size: small;" (click)="removeGroup(g); filterGroupName(groupInput.value);">
                         Remove

@@ -11,6 +11,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { MenuBarComponent } from './menu-bar/menu-bar.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ChatRoomComponent } from './chat-room/chat-room.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ProfileComponent } from './profile/profile.component';
     SignInComponent,
     SignUpComponent,
     MenuBarComponent,
-    ProfileComponent
+    ProfileComponent,
+    ChatRoomComponent
   ],
   imports: [
     BrowserModule,

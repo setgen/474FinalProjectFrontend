@@ -8,4 +8,10 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'GroupUs';
   menuClass='active bg-dark';
+
+  status: boolean = true;
+  clickEvent(){
+    this.status = !this.status;       
+  }
+
 }

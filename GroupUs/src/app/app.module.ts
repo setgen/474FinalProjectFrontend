@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { MatToolbarModule, MatIconModule, MatInputModule, MatSelectModule, 
   MatSidenavModule, MatListModule, MatButtonModule } from  '@angular/material';
@@ -10,6 +11,10 @@ import { HomeComponent } from './home/home.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { MenuBarComponent } from './menu-bar/menu-bar.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ChatRoomComponent } from './chat-room/chat-room.component';
+import { ApiService } from './api.service';
+
 
 @NgModule({
   declarations: [
@@ -17,13 +22,16 @@ import { MenuBarComponent } from './menu-bar/menu-bar.component';
     HomeComponent,
     SignInComponent,
     SignUpComponent,
-    MenuBarComponent
+    MenuBarComponent,
+    ProfileComponent,
+    ChatRoomComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    FormsModule,  
+    FormsModule,
+    HttpClientModule,
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,  
@@ -32,7 +40,7 @@ import { MenuBarComponent } from './menu-bar/menu-bar.component';
     MatSelectModule,
     MatIconModule
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

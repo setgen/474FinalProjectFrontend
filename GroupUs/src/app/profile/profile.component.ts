@@ -1,6 +1,6 @@
 import { ActivatedRoute } from '@angular/router'
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../user.service';
+import { ApiService } from '../api.service';
 
 /* DUMMY DATA */
 class User {
@@ -18,6 +18,11 @@ class Group {
   groupID: string;
   groupName: string;
   members: string[];
+  events: Event[];
+}
+
+class Event {
+
 }
 
 let testUser = new User();
@@ -54,7 +59,9 @@ g5.members = ['1', '2', '3', '4', '5'];
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  users: any;
+  userData: any;
+  groupData: any;
+
   id: string;
   u: User;
   groups: Group[];
@@ -64,11 +71,12 @@ export class ProfileComponent implements OnInit {
   editingUserInfo: boolean;
   errorDetected: boolean;
 
-  constructor(private service: UserService, private route: ActivatedRoute) {
-    this.id = this.route.snapshot.paramMap.get('id');
+  constructor(private service: ApiService, private route: ActivatedRoute) {
+    this.id = this.route.snapshot.paramMap.get('username');
     console.log(this.id);
-    this.users = null;
+    this.userData = null;
     this.u = null;
+    this.groups = [];
     this.canEdit = true;
     this.editingUserInfo = false;
     this.errorDetected = false;
@@ -106,34 +114,62 @@ export class ProfileComponent implements OnInit {
     reader.onerror = err => console.log(err);
   }
 
-  retrieveUsers(service: UserService) {
+  retrieveUsers(service: ApiService) {
     service.getUsers().subscribe(
-      data => { this.users = data; },
+      data => { this.userData = data; },
       err => { console.error(err); this.errorDetected = true; },
       () => { 
         console.log('done loading users'); 
-        console.log(this.users);
+        console.log(this.userData);
         this.getUserInfo();
+        this.retrieveGroups(service);
       }
     );
   }
 
+  retrieveGroups(service: ApiService) {
+    service.getGroups().subscribe(
+      data => { this.groupData = data; },
+      err => { console.error(err); this.errorDetected = true; },
+      () => {
+        console.log('done loading groups');
+        console.log(this.groupData);
+        this.getGroupInfo();
+      }
+    )
+  }
+
   getUserInfo() {
-    for (let user of this.users) {
-      console.log(user._id === this.id)
-      if(user._id === this.id) {
+    for (let user of this.userData) {
+      if(user.username === this.id) {
         let newu = new User();
         newu.firstName = user.firstName;
         newu.lastName = user.lastName;
         newu.username = user.username;
-        //newu.password = user.password;
+        newu.password = user.password;
         newu.bio = user.bio;
-        //newu.id = user._id;
+        newu.id = user._id;
         newu.groupIDs = user.groupIDs;
         newu.picture = user.profilePicture;
-
         this.u = newu;
       }
     };
+  }
+
+  getGroupInfo() {
+    for (let group of this.groupData) {
+      for (let gid of this.u.groupIDs) {
+        if(group._id === gid) {
+          let newg = new Group();
+          newg.groupID = gid;
+          newg.groupName = group.groupName;
+          newg.members = group.members;
+          newg.events = group.events;
+          this.groups.push(newg);
+        }
+      }
+    }
+    this.filterGroupName('');
+    console.log(this.groups);
   }
 }

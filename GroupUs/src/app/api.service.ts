@@ -11,7 +11,8 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class ApiService {
+  token: string;
   baseURL: string;
 
   constructor(private http: HttpClient) {
@@ -21,6 +22,13 @@ export class UserService {
   getUsers(): Observable<any> {
     return this.http.get(
       this.baseURL + '/users',
+      httpOptions
+    );
+  }
+
+  getGroups(): Observable<any> {
+    return this.http.get(
+      this.baseURL + '/groups',
       httpOptions
     );
   }

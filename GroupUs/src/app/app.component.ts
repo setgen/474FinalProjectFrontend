@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserService } from './user.service';
+import { ApiService } from './api.service';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +9,5 @@ import { UserService } from './user.service';
 export class AppComponent {
   title = 'GroupUs';
   menuClass='active bg-dark';
-  constructor(private _userService: UserService) {}
+  constructor(private _apiService: ApiService) {}
 }

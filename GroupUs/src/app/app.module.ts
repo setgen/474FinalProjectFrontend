@@ -13,7 +13,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { MenuBarComponent } from './menu-bar/menu-bar.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChatRoomComponent } from './chat-room/chat-room.component';
-import { UserService } from './user.service';
+import { ApiService } from './api.service';
 
 
 @NgModule({
@@ -40,7 +40,7 @@ import { UserService } from './user.service';
     MatSelectModule,
     MatIconModule
   ],
-  providers: [UserService],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

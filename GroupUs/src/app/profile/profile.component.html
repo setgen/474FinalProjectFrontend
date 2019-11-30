@@ -58,7 +58,7 @@
                 <hr/>
                 <ul class='list-group'>
                     <li class="list-group-item list-group-item-action" *ngFor="let g of filteredGroups">
-                        <a href="/groups/{{g.groupID}}">
+                        <a href="/groups/{{g.groupName}}">
                             <b>{{g.groupName}}</b> ({{g.members.length}} {{g.members.length == 1 ? 'member' : 'members'}})
                         </a>
                         <button *ngIf="canEdit" type="button" class="btn btn-danger btn-sm py-0" style="float:right; font-size: small;" (click)="removeGroup(g); filterGroupName(groupInput.value);">

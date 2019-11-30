@@ -6,12 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'GroupUs';
-  menuClass='active bg-dark';
-
-  status: boolean = true;
-  clickEvent(){
-    this.status = !this.status;       
-  }
+  
 
 }

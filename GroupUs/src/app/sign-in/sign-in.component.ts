@@ -12,4 +12,12 @@ export class SignInComponent implements OnInit {
   ngOnInit() {
   }
 
+  title = 'GroupUs';
+  menuClass='active bg-dark';
+
+  status: boolean = true;
+  clickEvent(){
+    this.status = !this.status;       
+  }
+
 }

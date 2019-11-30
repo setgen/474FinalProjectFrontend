@@ -11,7 +11,7 @@ const routes: Routes = [
   {path:'home', component: HomeComponent},
   {path:'sign-in',component: SignInComponent},
   {path:'sign-up',component: SignUpComponent},
-  {path:'profile', component: ProfileComponent},
+  {path:'user/:id', component: ProfileComponent},
   {path:'chat', component: ChatRoomComponent}
 ];
 

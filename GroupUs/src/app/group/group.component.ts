@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GroupEvent } from '../models/Event'
 import { Group } from '../models/Group';
 import { ApiService } from '../api.service';
 import { ActivatedRoute } from '@angular/router';
@@ -16,9 +17,11 @@ export class GroupComponent implements OnInit {
 
   id:string;
   g:Group;
+  newGroupMembers: User[];
+  filteredUsers: any[];
 
   users:User[];
-  events:Event[];
+  events:GroupEvent[];
 
   canEdit:boolean;
   errorDetected:boolean;
@@ -49,6 +52,7 @@ export class GroupComponent implements OnInit {
         console.log(this.groupData);
         this.getGroupInfo();
         this.retrieveUsers(service);
+        this.getEventInfo();
       }
     )
   }
@@ -62,7 +66,8 @@ export class GroupComponent implements OnInit {
         newg.events = group.events;
 
         this.g = newg;
-        this.canEdit = this.service.getCurrUser() && this.currUserInGroup(this.g);
+        this.canEdit = true;
+        //this.canEdit = this.service.getCurrUser() && this.currUserInGroup(this.g);
       }
     };
   }
@@ -76,6 +81,21 @@ export class GroupComponent implements OnInit {
       }
     }
     return found;
+  }
+
+  getEventInfo() {
+    this.events = [];
+    for (let event of this.g.events) {
+      let newe:GroupEvent = new GroupEvent();
+      newe._id = event._id;
+      newe.title = event.title;
+      newe.description = event.description;
+      newe.dateOfEvent = event.dateOfEvent;
+      newe.time = event.time;
+      newe.locationName = event.locationName;
+      newe.locationAddress = event.locationAddress;
+      this.events.push(newe);
+    }
   }
 
   retrieveUsers(service: ApiService) {
@@ -109,5 +129,61 @@ export class GroupComponent implements OnInit {
       }
     }
     console.log(this.users);
+  }
+
+  initNewGroupMembers() {
+    this.newGroupMembers = [];
+  }
+
+  addNewGroupMember(u:any) {
+    let mem:User = new User();
+    mem.firstName = u.firstName;
+    mem.lastName = u.lastName;
+    mem.username = u.username;
+    mem.password = u.password;
+    mem.bio = u.bio;
+    mem.id = u._id;
+    mem.groupIDs = u.groupIDs;
+    mem.picture = u.profilePicture;
+
+    this.newGroupMembers.push(mem);
+  }
+
+  removeMember(toRemove:User) {
+    for (let m of this.newGroupMembers) {
+      if (toRemove.username === m.username) {
+        this.newGroupMembers.splice(this.newGroupMembers.indexOf(m),1);
+        break;
+      }
+    }
+  }
+
+  filterUsernames(filter:string) {
+    if (filter === '') {
+      this.filteredUsers = [];
+    }
+    else {
+      this.filteredUsers = this.userData.filter(u => u.username.toLowerCase().includes(filter.toLowerCase()) && !this.userInAddedList(u));
+    }
+  }
+
+  userInAddedList(u:any):boolean {
+    let found:boolean = false;
+
+    for (let m of this.newGroupMembers) {
+      if (u.username === m.username) {
+        found = true;
+        break;
+      }
+    }
+
+    for (let m of this.g.members) {
+      if (u.username === m) {
+        found = true;
+        break;
+      }
+    }
+
+    return found;
   }
 }

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { User } from '../models/User'
 import { Group } from '../models/Group'
-import { Event } from '../models/Event'
+import { GroupEvent } from '../models/Event'
 
 @Component({
   selector: 'app-profile',
@@ -75,7 +75,7 @@ export class ProfileComponent implements OnInit {
   }
 
   initNewGroupMembers() {
-    this.newGroupMembers = [this.service.getCurrUser()];
+    this.newGroupMembers = [this.u];
   }
 
   addNewGroupMember(u:any) {

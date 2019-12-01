@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from './models/User'
+import { Group } from './models/Group';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -27,11 +28,11 @@ export class ApiService {
     localStorage.setItem('currUser',JSON.stringify(u));
   }
 
-  getToken() {
+  getToken():string {
     return localStorage.getItem('token');
   }
 
-  getCurrUser() {
+  getCurrUser():User {
     return JSON.parse(localStorage.getItem('currUser'));
   }
 
@@ -51,7 +52,7 @@ export class ApiService {
       this.baseURL + '/users/user_id',
       {
         "username":u.username,
-        "password":u.password,
+        //"password":u.password,
         "firstName":u.firstName,
         "lastName":u.lastName,
         "bio":u.bio,
@@ -77,6 +78,25 @@ export class ApiService {
         })
       }
     );
+  }
+
+  createGroup(g:Group): Observable<any> {
+    return this.http.post(
+      this.baseURL + '/groups',
+      {
+        "groupName":g.groupName,
+        "members":g.members,
+        "messages":g.messages,
+        "events":g.events
+      },
+      {
+        headers: new HttpHeaders({
+          'Content-Type':'application/json',
+          'Authorization':this.getToken(),
+          'Access-Control-Allow-Origin':'*'
+        })
+      }
+    )
   }
 
   login(u:string, p:string): Observable<any> {

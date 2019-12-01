@@ -39,6 +39,9 @@ export class ProfileComponent implements OnInit {
   groups: Group[];
   filteredGroups: Group[];
   editProfileMsg: string;
+  groupMsg: string;
+  newGroupMembers: User[];
+  filteredUsers: any[];
 
   canEdit: boolean;
   editingUserInfo: boolean;
@@ -54,6 +57,8 @@ export class ProfileComponent implements OnInit {
     this.canEdit = true;
     this.editingUserInfo = false;
     this.errorDetected = false;
+    this.editProfileMsg = '';
+    this.groupMsg = '';
 
     this.retrieveUsers(this.service);
   }
@@ -82,14 +87,99 @@ export class ProfileComponent implements OnInit {
       err => { console.error(err); this.editProfileMsg = 'An error occurred when updating user.'; },
       () => {
         this.retrieveUsers(this.service);
+        this.setEditingUser(false);
       }
     )
+  }
 
-    this.setEditingUser(false);
+  initNewGroupMembers() {
+    this.newGroupMembers = [this.service.getCurrUser()];
+  }
+
+  addNewGroupMember(u:any) {
+    let mem:User = new User();
+    mem.firstName = u.firstName;
+    mem.lastName = u.lastName;
+    mem.username = u.username;
+    mem.password = u.password;
+    mem.bio = u.bio;
+    mem.id = u._id;
+    mem.groupIDs = u.groupIDs;
+    mem.picture = u.profilePicture;
+
+    this.newGroupMembers.push(mem);
+  }
+
+  removeMember(toRemove:User) {
+    for (let m of this.newGroupMembers) {
+      if (toRemove.username === m.username) {
+        this.newGroupMembers.splice(this.newGroupMembers.indexOf(m),1);
+        break;
+      }
+    }
+  }
+
+  filterUsernames(filter:string) {
+    if (filter === '') {
+      this.filteredUsers = [];
+    }
+    else {
+      this.filteredUsers = this.userData.filter(u => u.username.toLowerCase().includes(filter.toLowerCase()) && !this.userInAddedList(u));
+    }
+  }
+
+  userInAddedList(u:any):boolean {
+    let found:boolean = false;
+
+    for (let m of this.newGroupMembers) {
+      if (u.username === m.username) {
+        found = true;
+        break;
+      }
+    }
+
+    return found;
+  }
+
+  createGroup(name:string) {
+    this.groupMsg = 'Creating group...';
+
+    let newg:Group = new Group();
+    newg.groupName = name;
+    newg.members = this.newGroupMembers.map(u => u.username);
+    newg.messages = [];
+    newg.events = [];
+
+    this.service.createGroup(newg).subscribe(
+      data => {},
+      err => {console.error(err); this.groupMsg = 'An error occurred when creating group.'},
+      () => {
+        for (let m of this.newGroupMembers) {
+          m.groupIDs.push(newg.groupID);
+          this.service.updateUser(m).subscribe(
+            data => {},
+            err => {console.error(err); this.groupMsg = 'An error occurred when creating group.'},
+            () => {}
+          )
+        }
+        this.retrieveUsers(this.service);
+      }
+    )
   }
 
   removeGroup(g:Group) {
     this.groups.splice(this.groups.indexOf(g),1);
+
+    this.u.groupIDs = this.groups.map(g => g.groupID);
+    this.groupMsg = 'Updating groups...'
+    this.service.updateUser(this.u).subscribe(
+      data => {},
+      err => { console.error(err); this.groupMsg = 'An error occurred when updating user.'; this.retrieveUsers(this.service) },
+      () => {
+        this.groupMsg = '';
+        this.retrieveUsers(this.service);
+      }
+    )
   }
 
   uploadProfilePic(files:FileList) {
@@ -144,6 +234,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getGroupInfo() {
+    this.groups = [];
     for (let group of this.groupData) {
       for (let gid of this.u.groupIDs) {
         if(group._id === gid) {
@@ -156,7 +247,7 @@ export class ProfileComponent implements OnInit {
         }
       }
     }
-    this.filterGroupName('');
+    this.filterGroupName((<HTMLInputElement>document.getElementById("groupInput")).value);
     console.log(this.groups);
   }
 }

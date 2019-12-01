@@ -1,1 +1,43 @@
-<p>sign-up works!</p>
+
+<body>
+        <div id="login">
+            <h3 class="text-center pt-5">GroupUs</h3>
+            <div class="container">
+                <div id="login-row" class="row justify-content-center align-items-center">
+                    <div id="login-column" class="col-md-6">
+                        <div id="login-box" class="col-md-12">
+                            <form id="login-form" class="form" action="" method="post">
+                                <h3 class="text-center text-info">Register</h3>
+                                <div class="form-group">
+                                    <label for="name" class="text-info">Name:</label><br>
+                                    <div>
+                                        <input #fnameInput style="width: 49%; display: inline-block; margin-right:2%;" type="text" name="name" id="name" class="form-control">
+                                        <input #lnameInput style="width: 49%; display: inline-block;" type="text" name="name" id="name" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="username" class="text-info">Username:</label><br>
+                                    <input #usernameInput type="text" name="username" id="username" class="form-control">
+                                </div>
+                                <div class="form-group" >
+                                    <label for="password" class="text-info">Password:</label><br>
+                                    <input #passwordInput type="text" name="password" id="password" class="form-control">
+                                </div>
+                   
+                                <div class="form-group">
+                                    <button style="margin-right: 8px" class="btn btn-success" (click)="tryRegister(fnameInput.value, lnameInput.value, usernameInput.value, passwordInput.value)">
+                                        Create
+                                    </button>
+                                    {{msg}}
+                                    <button style="float:right;" class="btn btn-dark" (click)="toSignIn()">
+                                        Have an Account?
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    

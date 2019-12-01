@@ -1,1 +1,108 @@
-<p>home works!</p>
+<style>
+  .collapse {
+  visibility: hidden;
+}
+.collapse.show {
+  visibility: visible;
+  display: block;
+}
+.collapsing {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  -webkit-transition-property: height, visibility;
+  transition-property: height, visibility;
+  -webkit-transition-duration: 0.35s;
+  transition-duration: 0.35s;
+  -webkit-transition-timing-function: ease;
+  transition-timing-function: ease;
+}
+.collapsing.width {
+  -webkit-transition-property: width, visibility;
+  transition-property: width, visibility;
+  width: 0;
+  height: auto;
+}
+</style>
+
+    
+   
+
+    <div class="wrapper" >
+          <nav id="sidebar" style="overflow-y:scroll; position: fixed; height: 100%; width: 20%;"
+          (click)="clickEvent()" [ngClass]="status ? '' : 'active'">
+            
+              <div class="sidebar-header" style="height: 54px; font-size: 23px;"
+              [ngClass]="status ? '' : 'active'">
+              
+                    <button type="button" id="sidebarCollapse" class="btn" style="color: white; outline: none !important; " 
+                    [ngClass]="status ? '' : 'active'">
+                         <i class="fas fa-bars" ></i>
+                    </button>
+                  <a id = "title1" [ngClass]="status ? '' : 'active'">GroupUs</a> 
+              </div>
+              <ul class="list-unstyled components" style="text-align: center;">
+                  <li>
+                      <a href="#">Group 1</a>
+                  </li>
+                  <li>
+                      <a href="#">Group 2</a>
+                  </li>
+                  <li>
+                      <a href="#">Group 3</a>
+                  </li>
+                  <li>
+                      <a href="#">Group 4</a>
+                  </li>
+                  <li>
+                      <a href="#">Group 5</a>
+                  </li>
+                  <li>
+                      <a href="#">Group 6</a>
+                  </li>
+                  <li>
+                      <a href="#">Group 7</a>
+                  </li>
+                  <li>
+                      <a href="#">Group 8</a>
+                  </li>
+                  <li>
+                      <a href="#">Group 9</a>
+                  </li>
+                  <li>
+                      <a href="#">Group 10</a>
+                  </li>
+                  <li>
+                      <a href="#">Group 11</a>
+                  </li>
+              </ul>
+        </nav>   
+      
+        <div id="content" [ngClass]="status ? '' : 'active'">
+                <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+                        <ul class="navbar-nav ml-auto nav-flex-icons">
+                                <li class="nav-item ">
+                                    <a [routerLinkActive]='activeClass' class="nav-link" routerLink='/home'>Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a [routerLinkActive]='activeClass' class="nav-link" routerLink='/sign-in'>Sign-In</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a [routerLinkActive]='activeClass' class="nav-link" routerLink='/sign-up'>Sign-Up</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a [routerLinkActive]='activeClass' class="nav-link" routerLink='/profile'>Profile</a>
+                                </li>
+                                <li class="nav-item avatar">
+                                    <a class="nav-link p-0" href="#">
+                                      <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar.jpg" class="rounded-circle z-depth-0"
+                                        alt="avatar image" height="35">
+                                    </a>
+                                </li>
+                        </ul>
+                 </nav>
+            <p>Place content here.</p>
+        </div>
+      
+      
+    </div>

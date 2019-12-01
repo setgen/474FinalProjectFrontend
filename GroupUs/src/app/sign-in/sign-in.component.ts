@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ApiService } from '../api.service';
+import { User } from '../models/User';
 
 @Component({
   selector: 'app-sign-in',
@@ -7,9 +10,54 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignInComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private s: ApiService) {
+    this.service = s;
+    //if (this.service.getCurrUser() != null)
+    //  router.navigate(['/home']);
+  }
 
   ngOnInit() {
   }
 
+  title = 'GroupUs';
+  menuClass='active bg-dark';
+
+  service: ApiService
+  loginData:any;
+
+  status: boolean = true;
+  errorDetected: boolean = false;
+
+  clickEvent(){
+    this.status = !this.status;
+  }
+
+  tryLogin(u:string, p:string) {
+    this.service.login(u,p).subscribe(
+      data => { this.loginData = data; },
+      err => { console.error(err); this.errorDetected = true; },
+      () => { 
+        console.log('log in successful'); 
+        console.log(this.loginData);
+        this.service.setToken(this.loginData.token);
+
+        let curru:User = new User();
+        curru.id = this.loginData.user._id;
+        curru.username = this.loginData.user.username;
+        curru.password = this.loginData.user.password;
+        curru.firstName = this.loginData.user.firstName;
+        curru.lastName = this.loginData.user.lastName;
+        curru.picture = this.loginData.user.profilePicture;
+        curru.bio = this.loginData.user.bio;
+        curru.groupIDs = this.loginData.user.groupIDs;
+        this.service.setCurrUser(curru);
+
+        this.router.navigate(['user/' + curru.username]);
+      }
+    );
+  }
+
+  toSignUp(){
+    this.router.navigate(['sign-up']);
+  }
 }

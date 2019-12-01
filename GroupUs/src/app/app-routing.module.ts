@@ -5,6 +5,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChatRoomComponent } from './chat-room/chat-room.component';
+import { GroupComponent } from './group/group.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'home',pathMatch:'full'},
@@ -12,7 +13,8 @@ const routes: Routes = [
   {path:'sign-in',component: SignInComponent},
   {path:'sign-up',component: SignUpComponent},
   {path:'user/:username', component: ProfileComponent},
-  {path:'chat', component: ChatRoomComponent}
+  {path:'chat', component: ChatRoomComponent},
+  {path:'groups/:id', component: GroupComponent}
 ];
 
 @NgModule({

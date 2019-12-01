@@ -1,1 +1,18 @@
-<p>group works!</p>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<section>
+    <div *ngIf="errorDetected; else groupPage" id='errorMessage'>
+        <p>There was an error retrieving user. Please try again.</p>
+    </div>
+
+    <ng-template #groupPage>
+        <!--Display Loading Spinner while Group is null-->
+        <div *ngIf="g == null; else groupInfo">
+            <div class="spinner-border" id="loadingSpinner">
+            </div>
+        </div>
+
+        <ng-template #groupInfo>
+            hey
+        </ng-template>
+    </ng-template>
+</section>

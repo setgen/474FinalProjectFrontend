@@ -31,11 +31,12 @@ export class ProfileComponent implements OnInit {
   constructor(private s: ApiService, private route: ActivatedRoute) {
     this.service = s;
     this.id = this.route.snapshot.paramMap.get('username');
-    console.log(this.id);
+    
     this.userData = null;
+    this.groupData = null;
     this.u = null;
     this.groups = [];
-    this.canEdit = true;
+    this.canEdit = false;
     this.editingUserInfo = false;
     this.errorDetected = false;
     this.editProfileMsg = '';

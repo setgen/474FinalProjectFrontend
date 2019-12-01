@@ -11,7 +11,9 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { MenuBarComponent } from './menu-bar/menu-bar.component';
 import { ProfileComponent } from './profile/profile.component';
-import { ChatRoomComponent } from './chat-room/chat-room.component';
+// import { ChatRoomComponent } from './chat-room/chat-room.component';
+import { ChatModule } from './chat/chat.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,8 +22,8 @@ import { ChatRoomComponent } from './chat-room/chat-room.component';
     SignInComponent,
     SignUpComponent,
     MenuBarComponent,
-    ProfileComponent,
-    ChatRoomComponent
+    ProfileComponent
+    // ChatRoomComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,9 @@ import { ChatRoomComponent } from './chat-room/chat-room.component';
     MatInputModule, 
     MatButtonModule,
     MatSelectModule,
-    MatIconModule
+    MatIconModule,
+    ChatModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

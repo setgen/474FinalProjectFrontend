@@ -12,7 +12,8 @@ import { MenuBarComponent } from './menu-bar/menu-bar.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChatRoomComponent } from './chat-room/chat-room.component';
 import { ApiService } from './api.service';
-import { MatToolbarModule, MatSidenavModule, MatListModule, MatInputModule, MatButtonModule, MatSelectModule, MatIconModule } from '@angular/material'
+import { MatToolbarModule, MatSidenavModule, MatListModule, MatInputModule, MatButtonModule, MatSelectModule, MatIconModule } from '@angular/material';
+import { GroupPageComponent } from './group-page/group-page.component'
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { MatToolbarModule, MatSidenavModule, MatListModule, MatInputModule, MatB
     SignUpComponent,
     MenuBarComponent,
     ProfileComponent,
-    ChatRoomComponent
+    ChatRoomComponent,
+    GroupPageComponent
   ],
   imports: [
     BrowserModule,

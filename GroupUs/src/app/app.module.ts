@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
+import { GroupComponent } from './group/group.component'
 import { HomeComponent } from './home/home.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
@@ -13,7 +14,6 @@ import { ProfileComponent } from './profile/profile.component';
 import { ChatRoomComponent } from './chat-room/chat-room.component';
 import { ApiService } from './api.service';
 import { MatToolbarModule, MatSidenavModule, MatListModule, MatInputModule, MatButtonModule, MatSelectModule, MatIconModule } from '@angular/material';
-import { GroupPageComponent } from './group-page/group-page.component'
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import { GroupPageComponent } from './group-page/group-page.component'
     MenuBarComponent,
     ProfileComponent,
     ChatRoomComponent,
-    GroupPageComponent
+    GroupComponent
   ],
   imports: [
     BrowserModule,

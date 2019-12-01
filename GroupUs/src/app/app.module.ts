@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
-import { MatToolbarModule, MatIconModule, MatInputModule, MatSelectModule, 
-  MatSidenavModule, MatListModule, MatButtonModule } from  '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -14,7 +12,7 @@ import { MenuBarComponent } from './menu-bar/menu-bar.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChatRoomComponent } from './chat-room/chat-room.component';
 import { ApiService } from './api.service';
-
+import { MatToolbarModule, MatSidenavModule, MatListModule, MatInputModule, MatButtonModule, MatSelectModule, MatIconModule } from '@angular/material'
 
 @NgModule({
   declarations: [
@@ -28,7 +26,6 @@ import { ApiService } from './api.service';
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,

@@ -15,12 +15,14 @@
         <ng-template #profile>
             <div class='userInfo'>
                 <!--Standard Profile Pic-->
-                <img *ngIf="!canEdit" src="{{u.picture}}" class='profilepic'>
+                <label *ngIf="!canEdit || !editingUserInfo" for="profilePicUpload" class='profilepic'>
+                        <img src="{{u.picture}}" class='profilepic'>
+                </label>
                 <!--Editable Profile Pic-->
-                <label *ngIf="canEdit" for="profilePicUpload" class='profilepic editableProfilePic'>
+                <label *ngIf="canEdit && editingUserInfo" for="profilePicUpload" class='profilepic editableProfilePic'>
                     <img src="{{u.picture}}" class='profilepic'>
                 </label>
-                <input #profilePicInput *ngIf="canEdit" type=file id="profilePicUpload" accept="image/png, image/jpeg" (change)="uploadProfilePic(profilePicInput.files)">
+                <input #profilePicInput *ngIf="canEdit && editingUserInfo" type=file id="profilePicUpload" accept="image/png, image/jpeg" (change)="uploadProfilePic(profilePicInput.files)">
 
                 <!--User Info-->
                 <div *ngIf="!editingUserInfo; else editUserInfoForm">

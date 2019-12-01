@@ -5,25 +5,6 @@ import { User } from '../models/User'
 import { Group } from '../models/Group'
 import { Event } from '../models/Event'
 
-/* DUMMY DATA */
-let g1 = new Group(), g2 = new Group(), g3 = new Group(), g4 = new Group(), g5 = new Group();
-g1.groupID = "123";
-g1.groupName = 'D&D Group';
-g1.members = ['1', '2', '3'];
-g2.groupID = "456";
-g2.groupName = "Gallamoza Family's Group";
-g2.members = ['1', '2', '3', '4'];
-g3.groupID = "789";
-g3.groupName = "Cool Kids Club";
-g3.members = ['1', '2', '3', '4', '5'];
-g4.groupID = "111";
-g4.groupName = "Apartment Group";
-g4.members = ['1', '2', '3', '4'];
-g5.groupID = "222";
-g5.groupName = "Friends Group";
-g5.members = ['1', '2', '3', '4', '5'];
-/* END OF DUMMY DATA */
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -154,14 +135,7 @@ export class ProfileComponent implements OnInit {
       data => {},
       err => {console.error(err); this.groupMsg = 'An error occurred when creating group.'},
       () => {
-        for (let m of this.newGroupMembers) {
-          m.groupIDs.push(newg.groupID);
-          this.service.updateUser(m).subscribe(
-            data => {},
-            err => {console.error(err); this.groupMsg = 'An error occurred when creating group.'},
-            () => {}
-          )
-        }
+        this.groupMsg = '';
         this.retrieveUsers(this.service);
       }
     )
@@ -225,7 +199,7 @@ export class ProfileComponent implements OnInit {
         newu.password = user.password;
         newu.bio = user.bio;
         newu.id = user._id;
-        newu.groupIDs = user.groupIDs;
+        newu.groupIDs = user.groupIDs ? user.groupIDs : [];
         newu.picture = user.profilePicture;
         this.u = newu;
         this.canEdit = this.service.getCurrUser() && this.service.getCurrUser().username === this.id;
@@ -236,10 +210,10 @@ export class ProfileComponent implements OnInit {
   getGroupInfo() {
     this.groups = [];
     for (let group of this.groupData) {
-      for (let gid of this.u.groupIDs) {
-        if(group._id === gid) {
+      for (let m of group.members) {
+        if(m === this.u.username) {
           let newg = new Group();
-          newg.groupID = gid;
+          newg.groupID = group._id;
           newg.groupName = group.groupName;
           newg.members = group.members;
           newg.events = group.events;

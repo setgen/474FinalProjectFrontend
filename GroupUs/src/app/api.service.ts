@@ -114,7 +114,13 @@ export class ApiService {
   register(fname:string, lname:string, u:string, p:string): Observable<any> {
     return this.http.post(
       this.baseURL + '/users',
-      {"firstName":fname, "lastName":lname, "username":u, "password":p},
+      {
+        "firstName":fname, 
+        "lastName":lname, 
+        "username":u, 
+        "password":p,
+        "groupIDs":[]
+      },
       {
         headers: new HttpHeaders({
           'Content-Type':'application/json'

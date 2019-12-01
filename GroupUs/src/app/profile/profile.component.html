@@ -95,7 +95,7 @@
                     <b>Members:</b>
                     <br/>
                     <div class="chip" *ngFor="let m of newGroupMembers">
-                        <img src="{{m.picture}}" width="96" height="96">
+                        <!--<img src="{{m.picture}}" width="96" height="96">-->
                         <b>{{m.username}}</b>
                         <span *ngIf="m.username != u.username" class="closebtn" (click)="removeMember(m); filterUsernames(userInput.value);">&times;</span>
                     </div> 
@@ -113,7 +113,7 @@
                     </ul>
                 </div>
                 <div class="modal-footer">
-                    <button type="button submit" class="btn btn-primary" (click)="createGroup(groupNameInput.value);">Create</button>
+                    <button type="button submit" class="btn btn-primary" data-dismiss="modal" (click)="createGroup(groupNameInput.value);">Create</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>

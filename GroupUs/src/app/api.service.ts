@@ -46,6 +46,28 @@ export class ApiService {
     );
   }
 
+  updateUser(u:User) {
+    return this.http.put(
+      this.baseURL + '/users/user_id',
+      {
+        "username":u.username,
+        "password":u.password,
+        "firstName":u.firstName,
+        "lastName":u.lastName,
+        "bio":u.bio,
+        "groupIDs":u.groupIDs,
+        "profilePicture":u.picture
+      },
+      {
+        headers: new HttpHeaders({
+          'Content-Type':'application/json',
+          'Authorization':this.getToken(),
+          'Access-Control-Allow-Origin':'*'
+        })
+      }
+    );
+  }
+
   getGroups(): Observable<any> {
     return this.http.get(
       this.baseURL + '/groups',

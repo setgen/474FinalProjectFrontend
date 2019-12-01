@@ -40,12 +40,14 @@
                     <input #lastNameInput type="text" id="lastNameForm" class="form-control form-control-sm" value="{{u.lastName}}" placeholder="Last Name" required>
                     <hr/>
                     <textarea #bioInput type="text" rows=5 class="form-control form-control-sm" value="{{u.bio}}" placeholder="Bio"></textarea>
-                    <button *ngIf="canEdit" id="okBtn" class="btn btn-success btn-sm" (click)="setEditingUser(false); setUserInfo(firstNameInput.value, lastNameInput.value, bioInput.value);">
+                    <button *ngIf="canEdit" id="okBtn" class="btn btn-success btn-sm" (click)="setUserInfo(firstNameInput.value, lastNameInput.value, bioInput.value);">
                         Save
                     </button>
-                    <button *ngIf="canEdit" id="okBtn" class="btn btn-light btn-sm" (click)="setEditingUser(false);">
+                    <button *ngIf="canEdit" id="okBtn" class="btn btn-light btn-sm" (click)="setEditingUser(false); getUserInfo();">
                         Cancel
                     </button>
+                    <br>
+                    {{editProfileMsg}}
                 </ng-template>
             </div>
 

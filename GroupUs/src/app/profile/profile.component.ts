@@ -38,6 +38,7 @@ export class ProfileComponent implements OnInit {
   u: User;
   groups: Group[];
   filteredGroups: Group[];
+  editProfileMsg: string;
 
   canEdit: boolean;
   editingUserInfo: boolean;
@@ -66,6 +67,7 @@ export class ProfileComponent implements OnInit {
   }
 
   setEditingUser(b:boolean) {
+    this.editProfileMsg = '';
     this.editingUserInfo = b;
   }
 
@@ -73,6 +75,17 @@ export class ProfileComponent implements OnInit {
     this.u.firstName = f;
     this.u.lastName = l;
     this.u.bio = b;
+
+    this.editProfileMsg = 'Updating user...'
+    this.service.updateUser(this.u).subscribe(
+      data => {},
+      err => { console.error(err); this.editProfileMsg = 'An error occurred when updating user.'; },
+      () => {
+        this.retrieveUsers(this.service);
+      }
+    )
+
+    this.setEditingUser(false);
   }
 
   removeGroup(g:Group) {

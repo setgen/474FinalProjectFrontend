@@ -1,25 +1,23 @@
 import { Component, OnInit, ViewChildren, ViewChild, AfterViewInit, QueryList, ElementRef } from '@angular/core';
 import { MatDialog, MatDialogRef, MatList, MatListItem } from '@angular/material';
 
-import { Action } from '../chat/shared/model/action';
-import { Event } from '../chat/shared/model/event';
-import { Message } from '../chat/shared/model/message';
-import { User } from '../chat/shared/model/user';
-import { SocketService } from '../chat/shared/services/socket.service';
-// import { SocketService } from '../socket.service';
-import { DialogUserComponent } from '../chat/dialog-user/dialog-user.component';
-import { DialogUserType } from '../chat/dialog-user/dialog-user-type';
+import { Action } from './shared/model/action';
+import { Event } from './shared/model/event';
+import { Message } from './shared/model/message';
+import { User } from './shared/model/user';
+import { SocketService } from './shared/services/socket.service';
+import { DialogUserComponent } from './dialog-user/dialog-user.component';
+import { DialogUserType } from './dialog-user/dialog-user-type';
 
 
 const AVATAR_URL = 'https://api.adorable.io/avatars/285';
 
 @Component({
   selector: 'tcc-chat',
-  templateUrl: './chat-room.component.html',
-  styleUrls: ['./chat-room.component.css']
+  templateUrl: './chat.component.html',
+  styleUrls: ['./chat.component.css']
 })
-export class ChatRoomComponent implements OnInit, AfterViewInit {
-  //socketService: SocketService;
+export class ChatComponent implements OnInit, AfterViewInit {
   action = Action;
   user: User;
   messages: Message[] = [];
@@ -40,9 +38,8 @@ export class ChatRoomComponent implements OnInit, AfterViewInit {
   // getting a reference to the items/messages within the list
   @ViewChildren(MatListItem, { read: ElementRef }) matListItems: QueryList<MatListItem>;
 
-  constructor(public socketService: SocketService,
-    public dialog: MatDialog) 
-    { }
+  constructor(private socketService: SocketService,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.initModel();

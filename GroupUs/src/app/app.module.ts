@@ -12,8 +12,11 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { MenuBarComponent } from './menu-bar/menu-bar.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChatRoomComponent } from './chat-room/chat-room.component';
+import { SharedModule } from './shared/shared.module';
+import { ChatModule } from './chat/chat.module';
 import { ApiService } from './api.service';
 import { MatToolbarModule, MatSidenavModule, MatListModule, MatInputModule, MatButtonModule, MatSelectModule, MatIconModule } from '@angular/material';
+import { SocketService } from './chat/shared/services/socket.service';
 
 @NgModule({
   declarations: [
@@ -31,15 +34,18 @@ import { MatToolbarModule, MatSidenavModule, MatListModule, MatInputModule, MatB
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    SharedModule,
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,  
     MatInputModule, 
     MatButtonModule,
     MatSelectModule,
-    MatIconModule
+    MatIconModule,
+    ChatModule,
+    BrowserAnimationsModule
   ],
-  providers: [ApiService],
+  providers: [ApiService, SocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

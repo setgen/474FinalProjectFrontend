@@ -66,7 +66,12 @@ export class ProfileComponent implements OnInit {
     this.editProfileMsg = 'Updating user...'
     this.service.updateUser(this.u).subscribe(
       data => {},
-      err => { console.error(err); this.editProfileMsg = 'An error occurred when updating user.'; },
+      err => { 
+        console.error(err); 
+        this.editProfileMsg = 'An error occurred when updating user.';
+        this.retrieveUsers(this.service);
+        this.setEditingUser(false); 
+      },
       () => {
         this.retrieveUsers(this.service);
         this.setEditingUser(false);
@@ -143,11 +148,23 @@ export class ProfileComponent implements OnInit {
   }
 
   removeGroup(g:Group) {
+    /*
     this.groups.splice(this.groups.indexOf(g),1);
 
     this.u.groupIDs = this.groups.map(g => g.groupID);
     this.groupMsg = 'Updating groups...'
     this.service.updateUser(this.u).subscribe(
+      data => {},
+      err => { console.error(err); this.groupMsg = 'An error occurred when updating user.'; this.retrieveUsers(this.service) },
+      () => {
+        this.groupMsg = '';
+      }
+    )
+    */
+   console.log('removing group');
+   console.log(g);
+    g.members.splice(g.members.indexOf(this.id),1);
+    this.service.updateGroup(g).subscribe(
       data => {},
       err => { console.error(err); this.groupMsg = 'An error occurred when updating user.'; this.retrieveUsers(this.service) },
       () => {
@@ -212,7 +229,7 @@ export class ProfileComponent implements OnInit {
     this.groups = [];
     for (let group of this.groupData) {
       for (let m of group.members) {
-        if(m === this.u.username) {
+        if(m === this.id) {
           let newg = new Group();
           newg.groupID = group._id;
           newg.groupName = group.groupName;

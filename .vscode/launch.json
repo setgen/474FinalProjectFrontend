@@ -7,10 +7,10 @@
         {
             "type": "firefox",
             "request": "launch",
-            "reAttach": true,
-            "name": "Launch GroupUs",
+            "name": "Launch Chrome against localhost",
             "url": "http://localhost:4300",
-            "webRoot": "${workspaceFolder}"
+            "webRoot": "${workspaceFolder}",
+            "sourceMaps":true
         }
 
     ]

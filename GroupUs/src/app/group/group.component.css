@@ -13,7 +13,7 @@
 }
 
 @media (max-width:800px) {
-    .userInfo {
+    .groupInfo {
         margin-top:2%;
         margin-left:2%;
         margin-right:2%;
@@ -22,23 +22,16 @@
         text-align: center;
     }
 
-    .groupsInfo {
+    .eventsInfo {
         margin-top:2%;
         margin-left:2%;
         margin-right:2%;
         text-align: center;
     }
-
-    .profilepic {
-        width:50%;
-        height:50%;
-    
-        border-radius:5px;
-    }
 }
 
 @media (min-width:801px) {
-    .userInfo {
+    .groupInfo {
         width:20%;
     
         float:left;
@@ -48,7 +41,7 @@
         margin-right:2%;
     }
 
-    .groupsInfo {
+    .eventsInfo {
         width:70%;
         float:left;
     
@@ -56,56 +49,6 @@
         margin-left:2%;
         margin-right:2%;
     }
-
-    .profilepic {
-        width:100%;
-        height:100%;
-    
-        border-radius:5px;
-    }
-}
-
-.editableProfilePic {
-    -webkit-filter: brightness(100%);
-}
-
-.editableProfilePic:hover{
-    -webkit-filter: brightness(80%);
-}
-
-input[type="file"] {
-    display: none;
-}
-
-#name {
-    font-size:28px;
-
-    margin:0px;
-    margin-top:10px;
-}
-
-#username {
-    font-size:18px;
-    color: lightslategray;
-
-    margin:0px;
-}
-
-#firstNameForm {
-    margin-top:7%;
-}
-
-#lastNameForm {
-    margin-top:2%;
-}
-
-#okBtn {
-    margin-top:5%;
-    margin-bottom:5%;
-}
-
-.form-control {
-    display:inline-block;
 }
 
 .chip {

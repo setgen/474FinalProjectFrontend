@@ -4,16 +4,18 @@ import { HomeComponent } from './home/home.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ProfileComponent } from './profile/profile.component';
-// import { ChatRoomComponent } from './chat-room/chat-room.component';
+import { ChatRoomComponent } from './chat-room/chat-room.component';
 import { ChatComponent } from './chat/chat.component';
+import { GroupComponent } from './group/group.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'home',pathMatch:'full'},
   {path:'home', component: HomeComponent},
   {path:'sign-in',component: SignInComponent},
   {path:'sign-up',component: SignUpComponent},
-  {path:'profile', component: ProfileComponent},
-  {path:'chat', component: ChatComponent}
+  {path:'user/:username', component: ProfileComponent},
+  {path:'chat', component: ChatRoomComponent},
+  {path:'groups/:id', component: GroupComponent}
 ];
 
 @NgModule({

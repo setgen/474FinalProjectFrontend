@@ -5,6 +5,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChatRoomComponent } from './chat-room/chat-room.component';
+import { ChatComponent } from './chat/chat.component';
 import { GroupComponent } from './group/group.component';
 
 const routes: Routes = [

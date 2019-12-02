@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <section>
     <div *ngIf="errorDetected; else profilePage" id='errorMessage'>
-        <p>There was an error retrieving users. Please try again.</p>
+        <p>There was an error retrieving user. Please try again.</p>
     </div>
 
     <ng-template #profilePage>
@@ -69,7 +69,7 @@
                             Remove
                         </button>
                     </li>
-                    <button *ngIf="canEdit" id="createGroupBtn" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#exampleModal" (click)="initNewGroupMembers();">
+                    <button *ngIf="canEdit" id="createGroupBtn" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#exampleModal" (click)="initNewGroupMembers(); groupNameInput.value = ''; userInput.value = ''; filterUsernames(userInput.value);">
                         Create New Group
                     </button>
                 </ul>
@@ -79,7 +79,7 @@
     </ng-template>
     
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -89,18 +89,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <b>Group Name:</b>
-                    <input #groupNameInput type="text" class="form-control" placeholder="Group Name" required>
+                    <input #groupNameInput type="text" class="form-control" style="margin-top:10px;" placeholder="Group Name" required>
                     <hr/>
-                    <b>Members:</b>
-                    <br/>
+                    <input #userInput id="userInput" type="text" class="form-control" style="margin-bottom:14px;" placeholder="Search users..." (input)="filterUsernames(userInput.value);">
                     <div class="chip" *ngFor="let m of newGroupMembers">
-                        <!--<img src="{{m.picture}}" width="96" height="96">-->
                         <b>{{m.username}}</b>
                         <span *ngIf="m.username != u.username" class="closebtn" (click)="removeMember(m); filterUsernames(userInput.value);">&times;</span>
                     </div> 
-                    <hr/>
-                    <input #userInput id="userInput" type="text" class="form-control" placeholder="Search users..." (input)="filterUsernames(userInput.value);">
                     <hr/>
                     <ul class='list-group'>
                         <li class="list-group-item" *ngFor="let u of filteredUsers">

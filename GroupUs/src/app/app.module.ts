@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
+import { GroupComponent } from './group/group.component'
 import { HomeComponent } from './home/home.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
@@ -12,7 +13,7 @@ import { MenuBarComponent } from './menu-bar/menu-bar.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ChatRoomComponent } from './chat-room/chat-room.component';
 import { ApiService } from './api.service';
-import { MatToolbarModule, MatSidenavModule, MatListModule, MatInputModule, MatButtonModule, MatSelectModule, MatIconModule } from '@angular/material'
+import { MatToolbarModule, MatSidenavModule, MatListModule, MatInputModule, MatButtonModule, MatSelectModule, MatIconModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { MatToolbarModule, MatSidenavModule, MatListModule, MatInputModule, MatB
     SignUpComponent,
     MenuBarComponent,
     ProfileComponent,
-    ChatRoomComponent
+    ChatRoomComponent,
+    GroupComponent
   ],
   imports: [
     BrowserModule,

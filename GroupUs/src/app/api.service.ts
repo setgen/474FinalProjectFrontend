@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from './models/User'
 import { Group } from './models/Group';
+import { GroupEvent } from './models/Event'
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -90,6 +91,67 @@ export class ApiService {
         "events":g.events
       },
       {
+        headers: new HttpHeaders({
+          'Content-Type':'application/json',
+          'Authorization':this.getToken(),
+          'Access-Control-Allow-Origin':'*'
+        })
+      }
+    )
+  }
+
+  updateGroup(g:Group): Observable<any> {
+    return this.http.put(
+      this.baseURL + '/groups',
+      {
+        "_id":g.groupID,
+        "groupName":g.groupName,
+        "members":g.members,
+        //"messages":g.messages,
+        "events":g.events
+      },
+      {
+        headers: new HttpHeaders({
+          'Content-Type':'application/json',
+          'Authorization':this.getToken(),
+          'Access-Control-Allow-Origin':'*'
+        })
+      }
+    )
+  }
+
+  createEvent(gid:string, e:GroupEvent): Observable<any> {
+    return this.http.post(
+      this.baseURL + '/groups/events',
+      {
+        "_id":gid,
+        "title":e.title,
+        "locationName":e.locationName,
+        "locationAddress":e.locationAddress,
+        "dateOfEvent":e.dateOfEvent,
+        "time":e.time,
+        "description":e.description,
+        "username":e.username
+      },
+      {
+        headers: new HttpHeaders({
+          'Content-Type':'application/json',
+          'Authorization':this.getToken(),
+          'Access-Control-Allow-Origin':'*'
+        })
+      }
+    )
+  }
+
+  deleteEvent(gid:string, eid:string): Observable<any> {
+    return this.http.request(
+      'delete',
+      this.baseURL + '/groups/event',
+      {
+        body: {
+          "_id":gid,
+          "event_id":eid
+        },
         headers: new HttpHeaders({
           'Content-Type':'application/json',
           'Authorization':this.getToken(),

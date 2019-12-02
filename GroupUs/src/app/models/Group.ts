@@ -1,4 +1,4 @@
-import { Event } from './Event'
+import { GroupEvent } from './Event'
 import { Message } from './Message'
 
 export class Group {
@@ -6,5 +6,5 @@ export class Group {
     groupName: string;
     members: string[];
     messages: Message[];
-    events: Event[];
+    events: GroupEvent[];
 }

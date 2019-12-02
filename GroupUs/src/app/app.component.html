@@ -1,1 +1,17 @@
-<router-outlet></router-outlet>
+
+<nav *ngIf="u != null" class="navbar navbar-expand navbar-dark bg-dark">
+    <img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/calendar-512.png" style="width:32px; height:32px; margin-right: 8px; vertical-align: middle;">
+    <a class="navbar-brand" href="/user/{{u.username}}">EventPlanner</a>
+    
+    <ul class="navbar-nav ml-auto" style="line-height: 170%;">
+        <li class="nav-item">
+            <a href="/user/{{u.username}}" class="nav-link">
+                My Profile
+            </a>
+        </li>
+        <li class="nav-item"  style="vertical-align: middle; display: table-cell;">
+            <a href="/sign-in" class="nav-link" (click)="logout()">Logout</a>
+        </li>
+    </ul>
+</nav>
+<router-outlet (activate)="onRouterOutletActivate($event)"></router-outlet>

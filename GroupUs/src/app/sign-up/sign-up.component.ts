@@ -28,12 +28,10 @@ export class SignUpComponent implements OnInit {
     this.msg = 'Creating user...';
     this.service.register(fname, lname, u, p).subscribe(
       data => { this.registerData = data; },
-      err => { console.error(err); this.errorDetected = true; this.msg = 'Error occurred!'},
+      err => { console.error(err); this.errorDetected = true; this.msg = 'Registration failed'},
       () => { 
-        console.log('register successful'); 
         console.log(this.registerData);
         this.msg = 'Register successful!';
-        this.router.navigate(['/sign-in']);
       }
     );
   }

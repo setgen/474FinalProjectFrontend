@@ -190,4 +190,9 @@ export class ApiService {
       }
     )
   }
+
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('currUser');
+  }
 }

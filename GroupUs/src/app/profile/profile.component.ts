@@ -166,7 +166,7 @@ export class ProfileComponent implements OnInit {
     g.members.splice(g.members.indexOf(this.id),1);
     this.service.updateGroup(g).subscribe(
       data => {},
-      err => { console.error(err); this.groupMsg = 'An error occurred when updating user.'; this.retrieveUsers(this.service) },
+      err => { console.error(err); this.groupMsg = ''; this.retrieveUsers(this.service) },
       () => {
         this.groupMsg = '';
         this.retrieveUsers(this.service);

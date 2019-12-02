@@ -2,7 +2,6 @@ body {
   margin: 0;
   padding: 0;
   background-color: white;
-  height: 100vh;
 }
 h3 {
     color : black !important;
@@ -11,7 +10,7 @@ label {
     color : black !important;
 }
 #login .container #login-row #login-column #login-box {
-  margin-top: 120px;
+  margin-top: 60px;
   max-width: 600px;
   height: 320px;
   border: 1px solid #9C9C9C;
@@ -25,4 +24,11 @@ label {
 }
 #login .container #login-row #login-column #login-box #login-form #register-link {
   margin-top: -100px;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }

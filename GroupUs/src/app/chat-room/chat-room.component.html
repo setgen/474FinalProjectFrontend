@@ -1,3 +1,5 @@
+
+
 <button mat-fab (click)="onClickUserInfo()">
   <mat-icon>person</mat-icon>
 </button>
@@ -34,3 +36,23 @@
     </div>
   </mat-card>
 </div>
+
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+  <ul class="navbar-nav ml-auto nav-flex-icons">
+          <li class="nav-item ">
+              <a [routerLinkActive]='activeClass' class="nav-link" routerLink='/home'>Home</a>
+          </li>
+          <li class="nav-item">
+            <a [routerLinkActive]='activeClass' class="nav-link" routerLink='/chat'>Chat</a>
+        </li>
+          <li class="nav-item">
+              <a [routerLinkActive]='activeClass' class="nav-link" routerLink='/profile'>Profile</a>
+          </li>
+          <li class="nav-item avatar">
+              <a class="nav-link p-0" href="#">
+                <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar.jpg" class="rounded-circle z-depth-0"
+                  alt="avatar image" height="35">
+              </a>
+          </li>
+  </ul>
+</nav>

@@ -16,12 +16,13 @@
                             </div>
                             <div class="form-group">
                                 <label for="password" class="text-info">Password:</label><br>
-                                <input #passwordInput type="text" name="password" id="password" class="form-control" style="margin-bottom: 24px;">
+                                <input #passwordInput type="password" name="password" id="password" class="form-control" style="margin-bottom: 24px;">
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-success" (click)="tryLogin(usernameInput.value, passwordInput.value);">
+                                <button class="btn btn-success" style="margin-right: 8px;" (click)="tryLogin(usernameInput.value, passwordInput.value);">
                                     Log In
                                 </button>
+                                {{msg}}
                                 <button style="float:right;" class="btn btn-dark" (click)="toSignUp()">
                                     Create An Account
                                 </button>

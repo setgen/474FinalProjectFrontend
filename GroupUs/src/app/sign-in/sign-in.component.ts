@@ -11,9 +11,10 @@ import { User } from '../models/User';
 export class SignInComponent implements OnInit {
 
   constructor(private router: Router, private s: ApiService) {
+    this.msg = '';
     this.service = s;
-    //if (this.service.getCurrUser() != null)
-    //  router.navigate(['/home']);
+    if (this.service.getCurrUser() != null)
+      router.navigate(['/user/' + this.service.getCurrUser().username]);
   }
 
   ngOnInit() {
@@ -28,14 +29,17 @@ export class SignInComponent implements OnInit {
   status: boolean = true;
   errorDetected: boolean = false;
 
+  msg:string;
+
   clickEvent(){
     this.status = !this.status;
   }
 
   tryLogin(u:string, p:string) {
+    this.msg = 'Logging in...';
     this.service.login(u,p).subscribe(
       data => { this.loginData = data; },
-      err => { console.error(err); this.errorDetected = true; },
+      err => { console.error(err); this.errorDetected = true; this.msg = 'Login failed'; },
       () => { 
         console.log('log in successful'); 
         console.log(this.loginData);

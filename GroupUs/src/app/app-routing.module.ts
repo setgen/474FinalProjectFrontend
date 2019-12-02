@@ -9,7 +9,7 @@ import { ChatComponent } from './chat/chat.component';
 import { GroupComponent } from './group/group.component';
 
 const routes: Routes = [
-  {path:'',redirectTo:'home',pathMatch:'full'},
+  {path:'',redirectTo:'sign-in',pathMatch:'full'},
   {path:'home', component: HomeComponent},
   {path:'sign-in',component: SignInComponent},
   {path:'sign-up',component: SignUpComponent},

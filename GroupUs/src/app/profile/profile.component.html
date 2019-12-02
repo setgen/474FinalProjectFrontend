@@ -69,7 +69,7 @@
                             Remove
                         </button>
                     </li>
-                    <button *ngIf="canEdit" id="createGroupBtn" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#exampleModal" (click)="initNewGroupMembers();">
+                    <button *ngIf="canEdit" id="createGroupBtn" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#exampleModal" (click)="initNewGroupMembers(); groupNameInput.value = ''; userInput.value = ''; filterUsernames(userInput.value);">
                         Create New Group
                     </button>
                 </ul>

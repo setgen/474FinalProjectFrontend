@@ -30,7 +30,7 @@
                                     <b>{{u.username}}</b>
                                 </a>
                             </li>
-                            <button id="addUserBtn" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#userModal" (click)="initNewGroupMembers();">
+                            <button id="addUserBtn" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#userModal" (click)="initNewGroupMembers(); userInput.value = ''; filterUsernames(userInput.value);">
                                 Add Users
                             </button>
                         </ul>
@@ -47,7 +47,7 @@
                     <hr>
                     <ul class='list-group'>
                             <li class="list-group-item list-group-item-action" *ngFor="let e of events">
-                                <button type="button" class="btn btn-danger btn-sm py-0" style="position:absolute; right:10px; font-size: small;" (click)="removeEvent(e);">
+                                <button type="button" class="btn btn-danger btn-sm py-0" style="position:absolute; right:10px; font-size: small;" (click)="tryDeleteEvent(e);">
                                     Remove
                                 </button>
                                 <h5><b>{{e.title}}</b></h5>
@@ -55,7 +55,7 @@
                                 <h6>{{e.dateOfEvent}} {{e.time}}</h6>
                                 {{e.description}}
                             </li>
-                        <button id="addEventBtn" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#eventModal" (click)="console.log('');">
+                        <button id="addEventBtn" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#eventModal" (click)="titleInput.value = ''; locationNameInput.value = ''; locationAddressInput.value = ''; dateOfEventInput.value = ''; timeInput.value = ''; descriptionInput.value = '';">
                             Add Event
                         </button>
                     </ul>
@@ -96,7 +96,7 @@
                 </ul>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success">Add</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" (click)="tryAddUsers();">Add</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
             </div>
@@ -117,12 +117,12 @@
                 <input #titleInput type="text" class="form-control" style="margin-top:10px;" placeholder="Title" required>
                 <input #locationNameInput type="text" class="form-control" style="margin-top:10px;" placeholder="Location Name" required>
                 <input #locationAddressInput type="text" class="form-control" style="margin-top:10px;" placeholder="Location Address" required>
-                <input #dateInput type="text" class="form-control" style="margin-top:10px;" placeholder="Date" required>
+                <input #dateOfEventInput type="text" class="form-control" style="margin-top:10px;" placeholder="Date" required>
                 <input #timeInput type="text" class="form-control" style="margin-top:10px;" placeholder="Time" required>
                 <textarea #descriptionInput type="text" rows=5 class="form-control" style="margin-top:10px;" placeholder="Description" required></textarea>
             </div>
             <div class="modal-footer">
-                <button type="button submit" class="btn btn-primary">Add</button>
+                <button type="button submit" class="btn btn-primary" data-dismiss="modal" (click)="tryCreateEvent(titleInput.value, locationNameInput.value, locationAddressInput.value, dateOfEventInput.value, timeInput.value, descriptionInput.value);">Add</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
             </div>

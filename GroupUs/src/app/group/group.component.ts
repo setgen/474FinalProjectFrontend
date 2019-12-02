@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GroupEvent } from '../models/Event'
 import { Group } from '../models/Group';
 import { ApiService } from '../api.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../models/User';
 
 @Component({
@@ -27,7 +27,7 @@ export class GroupComponent implements OnInit {
   errorDetected:boolean;
 
 
-  constructor(private s: ApiService, private route: ActivatedRoute) {
+  constructor(private s: ApiService, private route: ActivatedRoute, private router: Router) {
     this.service = s;
     this.id = this.route.snapshot.paramMap.get('id');
 
@@ -61,13 +61,14 @@ export class GroupComponent implements OnInit {
     for (let group of this.groupData) {
       if(group._id === this.id) {
         let newg = new Group();
+        newg.groupID = this.id;
         newg.groupName = group.groupName;
         newg.members = group.members;
         newg.events = group.events;
 
         this.g = newg;
-        this.canEdit = true;
-        //this.canEdit = this.service.getCurrUser() && this.currUserInGroup(this.g);
+        
+        this.canEdit = this.service.getCurrUser() && this.currUserInGroup(this.g);
       }
     };
   }
@@ -185,5 +186,51 @@ export class GroupComponent implements OnInit {
     }
 
     return found;
+  }
+
+  tryAddUsers() {
+    for (let username of this.newGroupMembers.map(m => m.username)) {
+      this.g.members.push(username);
+    }
+    console.log(this.g);
+    this.service.updateGroup(this.g).subscribe(
+      data => { console.log(data); },
+      err => { console.error(err); this.retrieveGroups(this.service); },
+      () => {
+        this.retrieveGroups(this.service);
+      }
+    );
+  }
+
+  tryCreateEvent(title:string, locationName:string, locationAddress:string, dateOfEvent:string, time:string, description:string) {
+    let newe:GroupEvent = new GroupEvent();
+    newe.title = title;
+    newe.locationName = locationName;
+    newe.locationAddress = locationAddress;
+    newe.dateOfEvent = dateOfEvent;
+    newe.time = time;
+    newe.description = description;
+    newe.username = this.service.getCurrUser().username;
+    console.log('hi1');
+    this.service.createEvent(this.id, newe).subscribe(
+      data => { console.log(data); },
+      err => { console.error(err); this.retrieveGroups(this.service); },
+      () => {
+        console.log('hi2');
+        this.retrieveGroups(this.service);
+      }
+    );
+  }
+
+  tryDeleteEvent(e:GroupEvent) {
+    console.log('hi1');
+    this.service.deleteEvent(this.id, e._id).subscribe(
+      data => { console.log(data); },
+      err => { console.error(err); this.retrieveGroups(this.service); },
+      () => {
+        console.log('hi2');
+        this.retrieveGroups(this.service);
+      }
+    );
   }
 }
